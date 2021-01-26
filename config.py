@@ -1,5 +1,7 @@
 from pyspark.sql.types import IntegerType, DateType, FloatType
 
+URL = 'https://covid19-lake.s3.us-east-2.amazonaws.com/rearc-covid-19-world-cases-deaths-testing/csv/covid-19-world-cases-deaths-testing.csv'
+
 DATASET_PATH = 'src/etl/raw_data/covid-19-world-cases-deaths-testing.csv'
 
 TARGET_PATH = 'src/etl/transformed_data/transformed_covid_world_cases.csv'

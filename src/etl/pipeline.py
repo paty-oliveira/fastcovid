@@ -5,7 +5,7 @@ from pyspark.sql import SparkSession
 
 def extract(url, target_path):
     try:
-        wget.download(url, os.getcwd() + target_path)
+        wget.download(url, target_path)
     except Exception as error:
         print(f'An error occurred: {error}')
     else:
@@ -34,8 +34,9 @@ def load(df, target_path):
         print('The data was loading with success!')
 
 
-def etl(dataset_path, target_path, columns, data_types, missing_values):
+def etl(url, dataset_path, target_path, columns, data_types, missing_values):
     try:
+        extract(url, 'src/etl/raw_data/')
         spark = SparkSession.builder.getOrCreate()
         raw_df = spark.read.csv(dataset_path, header=True)
         transformed_df = transform(raw_df, columns, data_types, missing_values)
