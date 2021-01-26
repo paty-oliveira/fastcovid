@@ -1,7 +1,6 @@
 import wget
 import os
 from pyspark.sql import SparkSession
-from fastcovid.config import *
 
 
 def extract(url, target_path):
@@ -35,12 +34,13 @@ def load(df, target_path):
         print('The data was loading with success!')
 
 
-def etl():
-    spark = SparkSession.builder.getOrCreate()
-    raw_df = spark.read.csv(DATASET_PATH, header=True)
-    transformed_df = transform(raw_df, COLUMNS_TO_SELECT, DATA_TYPES, MISSING_VALUES)
-    load(transformed_df, TARGET_PATH)
-
-
-if __name__ == '__main__':
-    etl()
+def etl(dataset_path, target_path, columns, data_types, missing_values):
+    try:
+        spark = SparkSession.builder.getOrCreate()
+        raw_df = spark.read.csv(dataset_path, header=True)
+        transformed_df = transform(raw_df, columns, data_types, missing_values)
+        load(transformed_df, target_path)
+    except Exception as error:
+        print(f'An error occured in the ETL process: {error}')
+    else:
+        print('The ETL process was done with success!')

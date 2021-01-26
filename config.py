@@ -1,8 +1,8 @@
 from pyspark.sql.types import IntegerType, DateType, FloatType
 
-DATASET_PATH = 'raw_data/covid-19-world-cases-deaths-testing.csv'
+DATASET_PATH = 'src/etl/raw_data/covid-19-world-cases-deaths-testing.csv'
 
-TARGET_PATH = 'transformed_data/transformed_covid_world_cases.csv'
+TARGET_PATH = 'src/etl/transformed_data/transformed_covid_world_cases.csv'
 
 DATA_TYPES = {'date': DateType(),
               'new_cases': IntegerType(),
